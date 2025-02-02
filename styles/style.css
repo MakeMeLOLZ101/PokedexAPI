@@ -1,0 +1,32 @@
+.pokemon-card {
+    transition: transform 0.3s ease;
+}
+.pokemon-card:hover {
+    transform: translateY(-5px);
+}
+.family {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+}
+.yourSaved {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+}
+.removePokemon {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+#dropdownContent {
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    z-index: 1000;
+    display: none;
+}

@@ -3,112 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pokémon Explorer</title>
-    <link rel="stylesheet" href="./src/output.css ">
+    <title>PokéDex</title>
+    <link rel="stylesheet" href="./src/output.css">
     <link rel="stylesheet" href="./styles/style.css">
 </head>
-<body>
-    <div>
-      <!-- Search Bar -->
-      <div class="top-grid grid auto-cols-auto p-2.5">
-        <div class="audio-grid">
-        <div class="searchBar">
-          <button class="randomBtn rounded-l-md searchBtn" id="randomBtn">
-            <img src="/assets/dice-5.svg" alt="random">
-          </button>
-          <input class="text-xl" id="search" placeholder="Search" type="text" />
-          <button class="searchBtn rounded-r-md">
-            <img id="searchBtn" src="/assets/search.svg" alt="search" />
-          </button>
-        </div>
-  
-        <button class="savedBtn flex justify-end">
-          <img id="savedBtn" src="/assets/2.png" alt="search" />
-        </button>
-        <div id="dropdownContent" class="bg-white rounded-xl dropdownContent" style="display: none">
-          <h1 class="text-3xl topBarSaved flex justify-center align-middle rounded-t-xl font-bold">Saved</h1>
-          <div id="savedList" class="gap-2.5 p-5">
-            <div id="storedValue" class="text-center">
-              <p>Currently Empty; Add Some More Pokemon</p>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="mb-8 text-center">
+            <h1 class="text-4xl font-bold mb-6 text-gray-800">Pokémon Explorer</h1>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 mb-4">
+                <input type="text" id="search" 
+                       class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
+                       placeholder="Enter Pokémon name or number">
+                <button id="searchBtn" 
+                        class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition">
+                    Search
+                </button>
+                <button id="randomBtn" 
+                        class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition">
+                    Random
+                </button>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="topBar flex justify-center p-3 ">
-        <h1 class="text-3xl font-bold" id="name">Name</h1>
-      </div>
-      <!-- Pokemon Info -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  sm:m-15 m-0 mt-3 mb-5 gap-2.5">
-        <div class="p-3 mainImg">
-          <div class="flex justify-evenly">
-            <img id="type" src="" alt="type1" />
-            <img id="type2" src="" alt="type2" />
-          </div>
-          <div class="flex justify-center">
-            <div class>
-              <img width="200px" id="pokemonImg" src="" alt="Pokemon" />
+
+        <div class="pokemon-card bg-white rounded-xl shadow-lg p-6 max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+                <div class="text-center md:text-left mb-4 md:mb-0">
+                    <h2 id="name" class="text-3xl font-bold text-gray-800"></h2>
+                </div>
+                <div class="flex gap-4 items-center">
+                    <button id="shiny" class="bg-yellow-500 rounded-lg p-2 hover:bg-yellow-600 transition">
+                        <img id="shinyIcon" src="/assets/Shiny.png" alt="Shiny Toggle" class="h-6 w-6">
+                    </button>
+                    <button id="savedBtn" class="relative rounded-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                        Press twice for Saved Pokemon
+                    </button>
+                    <button id="savedPokemon" class="relative rounded-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                        Saved this Pokemon
+                    </button>
+
+                </div>
             </div>
-          </div>
-          <div>
-            <button id="shiny">
-              <img id="shinyIcon" src="/assets/Shiny.png" alt="shiny" />
-            </button>
-          </div>
-        </div>
-  
-        <!-- Info -->
-        <div class="infoBox text-center rounded-xl">
-          <div class="topBar rounded-t-xl grid-cols-3 grid">
-            <img class="notSaved" id="savedPokemon" src="/assets/2.svg" alt="saved">
-            <h1 class="text-3xl font-bold">Info</h1>
-          </div>
-          <div class="p-2.5">
-            <h1 class="text-2xl font-bold">Abilities</h1>
-            <div class="text-lg">
-              <p id="ability1"></p>
-              <p id="ability2"></p>
-              <p id="ability3"></p>
+
+            <div id="dropdownContent" class="hidden">
+                <div id="storedValue"></div>
             </div>
-            <h1 class="text-2xl font-bold">Location</h1>
-            <p class="text-lg" id="location"></p>
-          </div>
-        </div>
-  
-        <!-- Stats -->
-        <div class="stat-grid" id="statsDiv">
-          <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl font-bold">Stats</h1>
-          <div class="grid grid-cols-2 background rounded-b-xl sm:text-md text-center statList p-5">
-            <div>
-              <p id="HP"></p>
-              <p id="Attack"></p>
-              <p id="Defense"></p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="text-center">
+                    <img id="pokemonImg" class="mx-auto mb-4 w-48 h-48 object-contain" src="" alt="Pokemon">
+                    <div class="flex justify-center gap-2 mb-4">
+                        <img id="type" src="" alt="Type 1" class="h-8">
+                        <img id="type2" src="" alt="Type 2" class="h-8">
+                    </div>
+                    <p class="text-gray-700">Location: <span id="location"></span></p>
+                </div>
+
+                <div>
+                    <div class="mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Evolution Chain</h3>
+                        <div id="family" class="flex flex-wrap gap-2"></div>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Abilities</h3>
+                        <div class="text-gray-700">
+                            <p id="ability1"></p>
+                            <p id="ability2"></p>
+                            <p id="ability3"></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Moves</h3>
+                        <div id="list" class="text-gray-700 max-h-40 overflow-y-auto"></div>
+                    </div>
+                </div>
             </div>
-            <div>
-              <p id="SpAttack"></p>
-              <p id="SpDefense"></p>
-              <p id="Speed"></p>
-            </div>
-          </div>
         </div>
-  
-        <!-- Evolution Family-->
-        <div class="family-grid background rounded-xl">
-          <h1 class="text-3xl topBar flex justify-center align-middle rounded-t-xl font-bold">Family</h1>
-          <div id="family" class="grid grid-cols-3 familyList gap-2.5 p-5">
-          </div>
-        </div>
-        <!-- Moves -->
-        <div class="moves-grid background rounded-xl">
-          <h1 class="text-3xl topBar flex justify-center rounded-t-xl font-bold">Moves</h1>
-          <div class="moveList text-lg text-center">
-            <ul id="list"></ul>
-          </div>
-        </div>
-      </div>
-      <!-- Main Img -->
     </div>
-  
-    <script type="module" src="/scripts/app.js"></script>
-  </body>
-  
-  </html>
+    <script type="module" src="./scripts/app.js"></script>
+</body>
+</html>
